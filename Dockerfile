@@ -1,13 +1,13 @@
-FROM alpine:latest
-LABEL maintainer "infiniteproject@gmail.com"
+FROM ubuntu:21.04
+LABEL maintainer "lucascarezia@gmail.com"
 
 RUN addgroup -S icecast && \
     adduser -S icecast
     
-RUN apk add --update \
-        icecast \
-        mailcap && \
-    rm -rf /var/cache/apk/*
+RUN apt update -y
+RUN apt install -y icecast2
+        
+RUN rm -rf /var/cache/apk/*
 
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
